@@ -6,13 +6,18 @@
 
 VeritasPrime is a chatbot built using the principles of **Retrieval‑Augmented Generation (RAG)**. It is designed to let users upload data or documents (or use predefined sources), retrieve relevant context from those sources, and generate intelligent answers — helping you build a context-aware, document-grounded conversational AI.  
 
-RAG lets language models ground their responses in external documents or knowledge bases, which helps produce more accurate and context-relevant answers. :contentReference[oaicite:2]{index=2}
+RAG lets language models ground their responses in external documents or knowledge bases, which helps produce more accurate and context-relevant answers. 
 
 ## 📁 Repository Structure
 
 / — root folder
-prime — core code / frontend / backend files (or main module)
-upload.js — script to upload documents or data (if applicable)
+/upload.js (to upload lorebook)
+
+prime — core code files (or main modules)
+/prime/src/ App.jsx , Main.jsx , Index.html , .env
+/prime/src/components/ AppIcons.jsx , ChatInput.jsx , MessageBubble.jsx
+/prime/src/services/gemini.js
+VeritasPrime/upload.js — script to upload documents or data (if applicable)
 
 
 
@@ -25,38 +30,46 @@ upload.js — script to upload documents or data (if applicable)
 
 ## 💻 Prerequisites
 
-- Node.js (for `upload.js` / frontend/backend)  
-- (If using Python or other services internally — list them here)  
-- Any required environment variables or configs (e.g. API keys, if you rely on external LLM or embedding services)  
-- A data source: documents, files, or a database to upload content for the chatbot to use  
+- Node.js (for `upload.js` / frontend/backend)   
+- Required environment variables or configs (e.g. API keys,Vector Database API Key)  
+- A data source(Lorebook): documents, files, or a database to upload content for the chatbot to use.  
 
 ## 🚀 Getting Started / How to Run
 
 1. Clone the repository  
-   ```bash
+   ```
    git clone https://github.com/yourusername/VeritasPrime.git
-   cd VeritasPrime
-Install dependencies
+   cd VeritasPrime/prime
+   ```
 
-bash
-Copy code
-# For example, if using npm/npm-based frontend
+
+2.Install dependencies
+```
+npm init -y
 npm install
-Upload documents/data
+npm i @langchain/pinecone @langchain/core @pinecone-database/pinecone @langchain/community @google/genai @langchain/google-genai @langchain/textsplitters dotenv pdf-parse readline-sync
+```
 
-bash
-Copy code
-# If there is an upload script
+3.Update env file
+Update your Gemini Api Key,Pinecone vector Database API key,Pinecone vector database Index name in prime/.env.
+
+
+4.If there is an upload script(Lorebook)
+Open VeritasPrime/upload.js, At line 34 give path to your lorebook.
+Run
+```
+cd VeritasPrime
 node upload.js
-(Or follow whatever UI/flow you provide to ingest data.)
+```
+Cross-Check Database file will be uploaded.
 
-Start the application / server
 
-bash
-Copy code
-# Example — adjust according to your setup
-npm start
-Interact with the chatbot via web UI (or CLI / API, as implemented)
+# Start the application 
+```
+cd VeritasPrime/prime
+npm run dev
+```
+Interact with the chatbot via web UI 
 Ask questions — the system will retrieve relevant context and produce answers.
 
 🧠 How It Works (Overview)
